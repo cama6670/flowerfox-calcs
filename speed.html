@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowerFox Speed Tiers</title>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --page:#f3f4ef; --surface:#fbfcf8; --surface-2:#eceee7; --line:#dcdfd5; --grid:#e6e8e0;
+  --ink:#141613; --ink-2:#585c55; --ink-3:#8a8e86;
+  --accent:#1f6f6b; --accent-ink:#ffffff; --accent-soft:#d8ebe9;
+  --tip:#141613; --tip-ink:#f6f7f2;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme:dark;
+  --page:#121412; --surface:#1b1e1b; --surface-2:#242824; --line:#33372f; --grid:#2a2e29;
+  --ink:#f1f2ec; --ink-2:#b6bab0; --ink-3:#7f837b;
+  --accent:#57b8b1; --accent-ink:#0f1a19; --accent-soft:#1f3c3a;
+  --tip:#f1f2ec; --tip-ink:#141613;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#121412; --surface:#1b1e1b; --surface-2:#242824; --line:#33372f; --grid:#2a2e29;
+  --ink:#f1f2ec; --ink-2:#b6bab0; --ink-3:#7f837b;
+  --accent:#57b8b1; --accent-ink:#0f1a19; --accent-soft:#1f3c3a;
+  --tip:#f1f2ec; --tip-ink:#141613;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:14px/1.45 "IBM Plex Sans",system-ui,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:38px;letter-spacing:.01em;margin:0;line-height:1;text-wrap:balance}
+.sub{color:var(--ink-2);margin:8px 0 0;max-width:78ch}
+.sub a{color:var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.card .n{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:20px;line-height:1}
+.card .f{color:var(--ink-3);font-size:12px;margin-top:2px}
+.card .s{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:34px;line-height:1;margin-top:8px;color:var(--accent)}
+.card .s small{font-size:13px;color:var(--ink-3);font-family:"IBM Plex Sans",sans-serif;font-weight:500;margin-left:4px}
+.card .o{font-size:12px;color:var(--ink-2);margin-top:6px;line-height:1.35}
+.bar-filters{position:sticky;top:0;z-index:5;background:var(--page);padding:14px 0 10px;margin-top:18px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.tog,.chip{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:15px;letter-spacing:.03em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);padding:5px 11px;border-radius:4px;cursor:pointer}
+.tog[aria-pressed="true"],.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tog:focus-visible,.chip:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:5px 8px}
+.grp{display:flex;gap:4px;align-items:center}
+.grp label{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
+.ladder{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 0}
+.tier{display:grid;grid-template-columns:76px 1fr;align-items:start;padding:5px 16px;border-top:1px solid var(--grid)}
+.tier:first-child{border-top:0}
+.tier.mine{background:var(--accent-soft)}
+.tier .v{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:22px;line-height:1.2}
+.tier .v small{font-size:11px;color:var(--ink-3);font-family:"IBM Plex Sans",sans-serif;font-weight:500;display:block;letter-spacing:.04em;text-transform:uppercase}
+.ent{display:flex;flex-wrap:wrap;gap:4px 10px;padding-top:2px}
+.e{display:inline-flex;align-items:baseline;gap:5px;padding:2px 8px;border-radius:4px;background:var(--surface-2);font-size:13px;cursor:default}
+.e.me{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.e .b{font-size:11px;color:var(--ink-3);letter-spacing:.03em}
+.e.me .b{color:var(--accent-ink);opacity:.8}
+.e .x{font-size:11px;color:var(--ink-2);font-style:italic}
+.e.me .x{color:var(--accent-ink);opacity:.85}
+.e .u{font-size:10px;color:var(--ink-3)}
+.prio{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.prio h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:22px;margin:0 0 6px;line-height:1}
+.prio ul{margin:0;padding-left:18px;color:var(--ink-2);columns:2;column-gap:28px}
+.prio li{break-inside:avoid;margin:2px 0}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip);color:var(--tip-ink);padding:8px 10px;border-radius:5px;font-size:12px;line-height:1.4;max-width:320px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+@media (max-width:760px){.prio ul{columns:1}.tier{grid-template-columns:60px 1fr}}
+</style>
+<div class="wrap">
+  <h1>FlowerFox Speed Tiers</h1>
+  <p class="sub">Where the six sit against the Reg M-C roster. Threat speeds are computed from base stats at three benchmarks: max with a plus nature, max neutral, and zero investment (plus a minus-nature floor for Trick Room mons). Usage is share of teams at 1500+.
+  Companion: <a href="https://cama6670.github.io/flowerfox-calcs/damage.html">incoming damage chart</a>.</p>
+  <div class="cards" id="cards"></div>
+  <div class="bar-filters">
+    <div class="grp"><label>Show</label>
+      <button class="chip" data-b="max+" aria-pressed="true">Max +nature</button>
+      <button class="chip" data-b="max" aria-pressed="true">Max neutral</button>
+      <button class="chip" data-b="zero" aria-pressed="true">0 EV</button>
+      <button class="chip" data-b="min-" aria-pressed="false">Min -nature</button>
+    </div>
+    <div class="grp"><label>Us</label><button class="tog" id="tw_us" aria-pressed="false">Tailwind</button></div>
+    <div class="grp"><label>Them</label>
+      <button class="tog" id="tw_them" aria-pressed="false">Tailwind</button>
+      <button class="tog" id="scarf" aria-pressed="false">Choice Scarf</button>
+      <button class="tog" id="unb" aria-pressed="false">Unburden popped</button>
+      <button class="tog" id="icy" aria-pressed="false">Icy Wind -1</button>
+    </div>
+    <div class="grp"><label for="wx">Weather</label><select id="wx"><option value="">None</option><option value="rain">Rain (Swift Swim)</option><option value="sun">Sun (Chlorophyll)</option><option value="sand">Sand (Sand Rush)</option></select></div>
+    <button class="tog" id="tr" aria-pressed="false">Trick Room</button>
+    <div class="grp"><label for="minuse">Min usage</label><select id="minuse"><option value="0">All</option><option value="5">5%</option><option value="10" selected>10%</option><option value="15">15%</option></select></div>
+  </div>
+  <div class="ladder" id="ladder"></div>
+  <div class="prio">
+    <h2>Priority that ignores the ladder</h2>
+    <ul id="prio"></ul>
+  </div>
+</div>
+<div id="tip" hidden></div>
+<script>
+const D = {"ours":[{"name":"Delphox","forme":"Delphox-Mega","spe":194,"ev":23,"nature":"Timid","item":"Delphoxite"},{"name":"Floette-Eternal","forme":"Floette-Mega","spe":130,"ev":8,"nature":"Modest","item":"Floettite"},{"name":"Sneasler","forme":"Sneasler","spe":189,"ev":32,"nature":"Jolly","item":"Focus Sash"},{"name":"Incineroar","forme":"Incineroar","spe":83,"ev":3,"nature":"Impish","item":"Sitrus Berry"},{"name":"Sinistcha","forme":"Sinistcha","spe":90,"ev":0,"nature":"Bold","item":"Colbur Berry"},{"name":"Kingambit","forme":"Kingambit","spe":70,"ev":0,"nature":"Adamant","item":"Life Orb"}],"roster":[{"name":"Rillaboom","species":"Rillaboom","usage":48.7,"note":"Grassy Glide is +1 priority in terrain","flags":{},"bench":{"max+":150,"max":137,"zero":105,"min-":94}},{"name":"Sneasler (Unburden)","species":"Sneasler","usage":31.4,"note":"Ladder Sneasler is 93% Unburden with a Seed or White Herb","flags":{"unburden":true},"bench":{"max+":189,"max":172,"zero":140,"min-":126}},{"name":"Incineroar","species":"Incineroar","usage":31.1,"note":"","flags":{},"bench":{"max+":123,"max":112,"zero":80,"min-":72}},{"name":"Salamence-Mega","species":"Salamence-Mega","usage":23.9,"note":"","flags":{},"bench":{"max+":189,"max":172,"zero":140,"min-":126}},{"name":"Kingambit","species":"Kingambit","usage":22.3,"note":"Sucker Punch +1","flags":{},"bench":{"max+":112,"max":102,"zero":70,"min-":63}},{"name":"Archaludon","species":"Archaludon","usage":22.3,"note":"","flags":{},"bench":{"max+":150,"max":137,"zero":105,"min-":94}},{"name":"Basculegion","species":"Basculegion","usage":19.8,"note":"Scarf 45% / Life Orb 42%; Aqua Jet +1","flags":{"scarf":true,"rain":true},"bench":{"max+":143,"max":130,"zero":98,"min-":88}},{"name":"Indeedee-F","species":"Indeedee-F","usage":18.9,"note":"Trick Room setter","flags":{},"bench":{"max+":150,"max":137,"zero":105,"min-":94}},{"name":"Farigiraf","species":"Farigiraf","usage":18.2,"note":"Trick Room setter","flags":{},"bench":{"max+":123,"max":112,"zero":80,"min-":72}},{"name":"Raichu-Mega-Y","species":"Raichu-Mega-Y","usage":17.6,"note":"Fake Out +3","flags":{},"bench":{"max+":200,"max":182,"zero":150,"min-":135}},{"name":"Gholdengo","species":"Gholdengo","usage":17.3,"note":"","flags":{},"bench":{"max+":149,"max":136,"zero":104,"min-":93}},{"name":"Garchomp-Mega-Z","species":"Garchomp-Mega-Z","usage":17.0,"note":"Garchompite Z is the top item (50%)","flags":{},"bench":{"max+":223,"max":203,"zero":171,"min-":153}},{"name":"Garchomp","species":"Garchomp","usage":17.0,"note":"Life Orb 31% / Scarf 19%","flags":{"scarf":true},"bench":{"max+":169,"max":154,"zero":122,"min-":109}},{"name":"Pelipper","species":"Pelipper","usage":15.7,"note":"Drizzle","flags":{},"bench":{"max+":128,"max":117,"zero":85,"min-":76}},{"name":"Golisopod-Mega","species":"Golisopod","usage":15.4,"note":"Mega forme not in engine; base Golisopod speed shown. First Impression +2","flags":{},"bench":{"max+":101,"max":92,"zero":60,"min-":54}},{"name":"Floette-Mega","species":"Floette-Mega","usage":13.2,"note":"","flags":{},"bench":{"max+":169,"max":154,"zero":122,"min-":109}},{"name":"Arcanine-Hisui","species":"Arcanine-Hisui","usage":12.3,"note":"Sash 90%; Scarf 2%","flags":{"scarf":true},"bench":{"max+":156,"max":142,"zero":110,"min-":99}},{"name":"Charizard-Mega-Y","species":"Charizard-Mega-Y","usage":11.9,"note":"Drought","flags":{},"bench":{"max+":167,"max":152,"zero":120,"min-":108}},{"name":"Gengar-Mega","species":"Gengar-Mega","usage":11.9,"note":"","flags":{},"bench":{"max+":200,"max":182,"zero":150,"min-":135}},{"name":"Milotic","species":"Milotic","usage":11.0,"note":"","flags":{},"bench":{"max+":146,"max":133,"zero":101,"min-":90}},{"name":"Politoed","species":"Politoed","usage":11.0,"note":"Drizzle","flags":{},"bench":{"max+":134,"max":122,"zero":90,"min-":81}},{"name":"Gardevoir-Mega","species":"Gardevoir-Mega","usage":9.4,"note":"","flags":{},"bench":{"max+":167,"max":152,"zero":120,"min-":108}},{"name":"Froslass","species":"Froslass","usage":9.4,"note":"Froslassite: Mega forme not in engine; base speed shown","flags":{},"bench":{"max+":178,"max":162,"zero":130,"min-":117}},{"name":"Tyranitar-Mega","species":"Tyranitar-Mega","usage":8.5,"note":"Sand Stream; Scarf 7% on base forme","flags":{},"bench":{"max+":135,"max":123,"zero":91,"min-":81}},{"name":"Volcarona","species":"Volcarona","usage":8.5,"note":"Quiver Dance +1","flags":{},"bench":{"max+":167,"max":152,"zero":120,"min-":108}},{"name":"Sylveon","species":"Sylveon","usage":8.5,"note":"","flags":{},"bench":{"max+":123,"max":112,"zero":80,"min-":72}},{"name":"Staraptor-Mega","species":"Staraptor-Mega","usage":7.5,"note":"Scarf 5% on base forme","flags":{},"bench":{"max+":178,"max":162,"zero":130,"min-":117}},{"name":"Sinistcha","species":"Sinistcha","usage":7.2,"note":"Trick Room setter","flags":{},"bench":{"max+":134,"max":122,"zero":90,"min-":81}},{"name":"Whimsicott","species":"Whimsicott","usage":6.9,"note":"Prankster Tailwind / Encore +1","flags":{},"bench":{"max+":184,"max":168,"zero":136,"min-":122}},{"name":"Blastoise-Mega","species":"Blastoise-Mega","usage":6.3,"note":"","flags":{},"bench":{"max+":143,"max":130,"zero":98,"min-":88}},{"name":"Grimmsnarl","species":"Grimmsnarl","usage":5.7,"note":"Prankster screens +1","flags":{},"bench":{"max+":123,"max":112,"zero":80,"min-":72}},{"name":"Talonflame","species":"Talonflame","usage":5.7,"note":"Gale Wings: Flying moves +1 at full HP","flags":{},"bench":{"max+":195,"max":178,"zero":146,"min-":131}},{"name":"Swampert-Mega","species":"Swampert-Mega","usage":5.7,"note":"Swift Swim","flags":{"rain":true},"bench":{"max+":134,"max":122,"zero":90,"min-":81}},{"name":"Lucario-Mega-Z","species":"Lucario-Mega-Z","usage":5.3,"note":"Vacuum Wave +1","flags":{},"bench":{"max+":223,"max":203,"zero":171,"min-":153}},{"name":"Pawmot","species":"Pawmot","usage":5.3,"note":"","flags":{},"bench":{"max+":172,"max":157,"zero":125,"min-":112}},{"name":"Excadrill","species":"Excadrill","usage":5.0,"note":"Sand Rush","flags":{"sand":true},"bench":{"max+":154,"max":140,"zero":108,"min-":97}},{"name":"Armarouge","species":"Armarouge","usage":5.0,"note":"","flags":{},"bench":{"max+":139,"max":127,"zero":95,"min-":85}},{"name":"Torkoal","species":"Torkoal","usage":4.7,"note":"Drought; Trick Room attacker","flags":{},"bench":{"max+":79,"max":72,"zero":40,"min-":36}},{"name":"Dragapult","species":"Dragapult","usage":4.7,"note":"","flags":{},"bench":{"max+":213,"max":194,"zero":162,"min-":145}},{"name":"Venusaur","species":"Venusaur","usage":4.4,"note":"Chlorophyll","flags":{"sun":true},"bench":{"max+":145,"max":132,"zero":100,"min-":90}},{"name":"Delphox-Mega","species":"Delphox-Mega","usage":4.0,"note":"","flags":{},"bench":{"max+":204,"max":186,"zero":154,"min-":138}}]};
+const S = {b:new Set(["max+","max","zero"]), tw_us:false, tw_them:false, scarf:false, unb:false, icy:false, wx:"", tr:false, minuse:10};
+const $ = s => document.querySelector(s);
+const BN = {"max+":"max+", "max":"max", "zero":"0 EV", "min-":"min-"};
+function mod(v, side, r){
+  let s = v;
+  if (side==="them"){
+    if (S.icy) s = Math.floor(s*2/3);
+    if (S.tw_them) s *= 2;
+    if (r){
+      if (S.scarf && r.flags.scarf) s = Math.floor(s*1.5);
+      if (S.unb && r.flags.unburden) s *= 2;
+      if (S.wx && r.flags[S.wx]) s *= 2;
+    }
+  } else { if (S.tw_us) s *= 2; }
+  return s;
+}
+function entries(){
+  const out = [];
+  D.ours.forEach(o => out.push({spe:mod(o.spe,"us"), me:true, name:o.name, forme:o.forme, sub:`${o.ev} Spe ${o.nature}`, raw:o.spe}));
+  D.roster.filter(r => r.usage >= S.minuse).forEach(r => {
+    for (const b of ["max+","max","zero","min-"]) if (S.b.has(b)){
+      const mods = [S.icy?"Icy Wind":"", S.tw_them?"Tailwind":"", (S.scarf&&r.flags.scarf)?"Scarf":"", (S.unb&&r.flags.unburden)?"Unburden":"", (S.wx&&r.flags[S.wx])?({rain:"Swift Swim",sun:"Chlorophyll",sand:"Sand Rush"})[S.wx]:""].filter(Boolean);
+      out.push({spe:mod(r.bench[b],"them",r), me:false, name:r.name, bench:b, usage:r.usage, note:r.note, raw:r.bench[b], mods});
+    }
+  });
+  return out;
+}
+function render(){
+  const es = entries();
+  const by = new Map(); es.forEach(e => { if(!by.has(e.spe)) by.set(e.spe,[]); by.get(e.spe).push(e); });
+  const keys = [...by.keys()].sort((a,b)=> S.tr ? a-b : b-a);
+  $("#ladder").innerHTML = keys.map(k => {
+    const list = by.get(k); const mine = list.some(e=>e.me);
+    return `<div class="tier${mine?" mine":""}"><div class="v">${k}${S.tr?`<small>moves ${keys.indexOf(k)+1===1?"first":"later"}</small>`:""}</div><div class="ent">${list.map(e => e.me
+      ? `<span class="e me" data-me="1" title="${e.forme}, ${e.sub}${S.tw_us?", Tailwind":""}">${e.name}<span class="b">${e.sub}</span></span>`
+      : `<span class="e" data-n="${e.name}" data-b="${e.bench}" title="${e.note||""}">${e.name}<span class="b">${BN[e.bench]}</span>${e.mods.length?`<span class="x">${e.mods.join(" + ")}</span>`:""}<span class="u">${e.usage}%</span></span>`).join("")}</div></div>`;
+  }).join("");
+  // cards: for each of ours, how many roster max+ (or shown benchmarks) sit above / tie / below
+  $("#cards").innerHTML = D.ours.map(o => {
+    const mine = mod(o.spe,"us");
+    const them = es.filter(e=>!e.me);
+    const above = them.filter(e=> S.tr ? e.spe<mine : e.spe>mine), tie = them.filter(e=>e.spe===mine);
+    const near = [...them].sort((a,b)=>Math.abs(a.spe-mine)-Math.abs(b.spe-mine)).filter(e=>e.spe!==mine).slice(0,3);
+    return `<div class="card"><div class="n">${o.name}</div><div class="f">${o.forme!==o.name?o.forme+" · ":""}${o.ev} Spe ${o.nature}</div>
+      <div class="s">${mine}${S.tw_us?"<small>tailwind</small>":""}</div>
+      <div class="o">${S.tr?"Moves after":"Outsped by"} <b>${above.length}</b> of ${them.length} shown entries${tie.length?`, ties ${tie.length}`:""}.<br>Nearest: ${near.map(e=>`${e.name} ${BN[e.bench]} ${e.spe}`).join(" · ")}</div></div>`;
+  }).join("");
+}
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{const k=c.dataset.b; const on=c.getAttribute("aria-pressed")!=="true"; c.setAttribute("aria-pressed",on); on?S.b.add(k):S.b.delete(k); render();});
+for (const id of ["tw_us","tw_them","scarf","unb","icy","tr"]) $("#"+id).onclick=e=>{S[id]=!S[id]; e.currentTarget.setAttribute("aria-pressed",S[id]); render();};
+$("#wx").onchange=e=>{S.wx=e.target.value;render();};
+$("#minuse").onchange=e=>{S.minuse=+e.target.value;render();};
+$("#prio").innerHTML = [
+  "Fake Out +3: Sneasler, Incineroar, Rillaboom, Raichu-Mega-Y (and ours)",
+  "First Impression +2: Golisopod",
+  "Grassy Glide +1 in Grassy Terrain: Rillaboom",
+  "Sucker Punch +1: Kingambit (ours too)",
+  "Aqua Jet +1: Basculegion",
+  "Vacuum Wave +1: Lucario-Mega-Z",
+  "Accelerock +1: Lycanroc-Dusk",
+  "Gale Wings +1 on Flying moves at full HP: Talonflame",
+  "Prankster status +1: Whimsicott (Tailwind, Encore), Grimmsnarl (screens, Thunder Wave)",
+  "Quick Guard +3 on Sneasler blocks all of the above except Prankster status",
+  "Trick Room -7: Indeedee-F, Farigiraf, Sinistcha (ours too), Torkoal",
+].map(t=>`<li>${t}</li>`).join("");
+render();
+</script>
+
+</body>
+</html>
